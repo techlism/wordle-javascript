@@ -47,7 +47,7 @@ const resetGame = (forms) => {
 
 }
 
-const compare = function(word,inputWord,inputs){
+const compareWords = (word,inputWord,inputs)=>{
     let totalGreens = 0;
     for (let j = 0; j < inputWord.length; j++) {
         if (word.includes(inputWord[j]) && inputWord[j] === word[j]) {
@@ -116,7 +116,8 @@ const processForm = function (forms) {
                 } 
                 else if (i === inputs.length - 1 && event.key === 'Enter' && inputWord.length === 5) {
                     generateWord().then(() => {
-                        const totalGreens= compare(word,inputWord,inputs);
+                        let totalGreens = null ;
+                        totalGreens =  compareWords(word,inputWord,inputs);
                         if(totalGreens===5){
                             //Need to restart the game (except updating the score).
                             score+=totalGreens;
@@ -124,14 +125,17 @@ const processForm = function (forms) {
                             setTimeout(() => {
                                 resetGame(forms,inputs);
                                 processForm(forms);                                                        
-                            }, 1200);
+                            }, 1000);
                         }
                         if(totalGreens < 5 && f === forms.length -1){
                             // reached to the last and not able to guess (display the right answer and restart the game)
                             resultDiv.textContent=`${word}`;
                             resultDiv.style.visibility="visible";
 
-                        } 
+                        }
+                        else if(!totalGreens){
+                            totalGreens=compareWords(word,inputWord,inputs);
+                        }
                     });
 
                     if (f < forms.length - 1) {
@@ -150,4 +154,3 @@ restartButton.addEventListener('click',()=>{
     resetGame(forms);
     processForm(forms);
 })
-  

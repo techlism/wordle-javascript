@@ -116,8 +116,20 @@ const processForm = function (forms) {
                 } 
                 else if (i === inputs.length - 1 && event.key === 'Enter' && inputWord.length === 5) {
                     generateWord().then(() => {
-                        let totalGreens = null ;
-                        totalGreens =  compareWords(word,inputWord,inputs);
+                        let totalGreens = 0;
+                        for (let j = 0; j < inputWord.length; j++) {
+                            if (word.includes(inputWord[j]) && inputWord[j] === word[j]) {
+                                inputs[j].style.backgroundColor = '#00ac06';
+                                totalGreens++;
+                            } 
+                            else if (word.includes(inputWord[j]) && inputWord[j] !== word[j]) {
+                                inputs[j].style.backgroundColor = '#ffb405';
+                            } 
+                            else {
+                                inputs[j].style.backgroundColor = '#484848';
+                            }
+                            inputs[j].style.color="#fff";
+                        }
                         if(totalGreens===5){
                             //Need to restart the game (except updating the score).
                             score+=totalGreens;

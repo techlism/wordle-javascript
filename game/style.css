@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Titan+One&display=swap');
+
+body{
+    margin: 0;
+    padding: 0;
+    /* overflow: scroll; */
+    background-color: hsl(66, 95%, 92%);
+    font-family: 'Titan One',cursive,'Helvetica';
+}
+.main-container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: solid 0.1px;
+    border-radius: 10px;
+    height: auto;
+    width: 50vw;
+}
+.row{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+    align-items: center;
+    align-content: center;
+}
+.result{
+    font-size: 40px;
+    visibility: collapse;
+    letter-spacing: 10px;
+    text-align: center;
+    margin-bottom: 5px;
+    margin-top: 15px;
+    color: #08bb0e;
+}
+input[type="text"] {
+    font-family: 'Titan One',cursive;
+    width: 42px;
+    height: 45px;
+    margin: 0 5px;
+    text-align: center;
+    font-size: 25px;
+    border: 1px solid #a9a9a9;
+    border-radius: 6px;
+    background-color: #ffffff;
+    box-shadow: 2px 1px 1px rgb(203, 197, 197);
+}
+input[type="text"]:focus {
+    outline: none;
+    border-color: #2c2323;
+}
+img{
+    height: 50px;
+    width:50px;
+}
+button{
+    background-color: transparent;
+    border: none;
+    margin-right: 2vw;
+}
+button:hover{
+    cursor:pointer;
+}
+.buttonScore{
+    width: auto;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-content: center;
+}
+.scoreArea{
+    font-size: 30px;
+    color: #4d4d4d;
+}
+footer{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+a{
+    text-decoration: none;
+    color: #00de5d;
+    font-size: 14px;
+    padding-top:20px;
+    padding-bottom: 20px;
+}

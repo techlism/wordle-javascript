@@ -1,0 +1,35 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: hsl(66, 95%, 92%);
+    font-family: Helvetica, sans-serif;
+}
+.main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+p{
+    font-size: 70px;
+   
+    text-align: center;
+    font-weight: bolder;
+    color: #08bb0e;
+}
+.buttonDiv{
+    display: flex;
+    justify-content:center ;
+    height: auto;
+    width: auto;
+}
+button{
+    margin: -100px;
+    padding: 0;
+    height: 50px;
+    width: 250px;
+    border-radius: 10px;
+    background-color: transparent;
+    color: #08bb0e;
+    font-size: 25px;
+}

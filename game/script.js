@@ -91,7 +91,7 @@ const processForm = function (forms) {
                 }
             });
 
-            document.addEventListener('keydown', event => {
+            input.addEventListener('keydown', event => {
                 if (event.key === 'Backspace' && input.value.length === 0 && i > 0) {
                     inputs[i - 1].focus(); // Move focus to the previous input field
                     inputWord = inputWord.slice(0, -1); // Remove the last character from the input word

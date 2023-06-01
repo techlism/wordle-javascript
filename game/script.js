@@ -44,21 +44,29 @@ const resetGame = (forms) => {
     const nextRowInputs = forms[0].querySelectorAll('input');
     nextRowInputs[0].focus();
     resultDiv.style.visibility="collapse";
-
 }
 
-const handleInput =(e,i,inputs,inputWord) =>{
-    e.target.value = e.target.value.toUpperCase();
-    const value = e.target.value;
-    inputWord += value;
-    if (value.length === 1) {
-        if (i < inputs.length - 1) {
-            inputs[i + 1].focus(); // Move focus to the next input field
+const compareWords = (word,inputWord,inputs)=>{
+    let totalGreens = 0;
+    word=word.toUpperCase();
+    inputWord=inputWord.toUpperCase();
+    for (let j = 0; j < inputWord.length; j++) {
+        if (word.includes(inputWord[j]) && inputWord[j] === word[j]) {
+            inputs[j].style.backgroundColor = '#00ac06';
+            totalGreens++;
+        } 
+        else if (word.includes(inputWord[j]) && inputWord[j] !== word[j]) {
+            inputs[j].style.backgroundColor = '#ffb405';
+        } 
+        else {
+            inputs[j].style.backgroundColor = '#484848';
         }
+        inputs[j].style.color="#fff";
     }
+    return totalGreens;    
 }
 
-const processForm = function (forms) {
+const startGame = function (forms) {
     let word = ''; // Store the generated word
   
     // Helper function to generate the word if needed
@@ -81,70 +89,62 @@ const processForm = function (forms) {
             const input = inputs[i];
 
             input.addEventListener('input', e => {
+
                 e.target.value = e.target.value.toUpperCase();
                 const value = e.target.value;
-                inputWord += value;
                 if (value.length === 1) {
+                    inputWord += value;
                     if (i < inputs.length - 1) {
                         inputs[i + 1].focus(); // Move focus to the next input field
                     }
                 }
+                else if(value.length > 1){
+                    e.target.value=e.target.value.slice(0,1);
+                }
+            
             });
 
-            input.addEventListener('keydown', event => {
-                if (event.key === 'Backspace' && input.value.length === 0 && i > 0) {
+            input.addEventListener('keydown',event=>{
+                    if (event.key === 'Backspace' && input.value.length === 0 && i > 0) {
                     inputs[i - 1].focus(); // Move focus to the previous input field
                     inputWord = inputWord.slice(0, -1); // Remove the last character from the input word
-                } 
-                else if (i === inputs.length - 1 && event.key === 'Enter' && inputWord.length === 5) {
-                    generateWord().then(() => {
-                        let totalGreens = 0;
-                        for (let j = 0; j < inputWord.length; j++) {
-                            if (word.includes(inputWord[j]) && inputWord[j] === word[j]) {
-                                inputs[j].style.backgroundColor = '#00ac06';
-                                totalGreens++;
-                            } 
-                            else if (word.includes(inputWord[j]) && inputWord[j] !== word[j]) {
-                                inputs[j].style.backgroundColor = '#ffb405';
-                            } 
-                            else {
-                                inputs[j].style.backgroundColor = '#484848';
-                            }
-                            inputs[j].style.color="#fff";
-                        }
-                        if(totalGreens===5){
-                            //Need to restart the game (except updating the score).
-                            score+=totalGreens;
-                            scoreArea.textContent=`Score : ${score}`;
-                            setTimeout(() => {
-                                resetGame(forms,inputs);
-                                processForm(forms);                                                        
-                            }, 1000);
-                        }
-                        if(totalGreens < 5 && f === forms.length -1){
-                            // reached to the last and not able to guess (display the right answer and restart the game)
-                            resultDiv.textContent=`${word}`;
-                            resultDiv.style.visibility="visible";
-
-                        }
-                        else if(!totalGreens){
-                            totalGreens=compareWords(word,inputWord,inputs);
-                        }
-                    });
-
-                    if (f < forms.length - 1) {
-                        const nextRowInputs = forms[f + 1].querySelectorAll('input');
-                        nextRowInputs[0].focus(); // Move focus to the first input field of the next row
                     }
-                }
-        });
+
+                    if(event.key==='Enter' && inputWord.length===5){                        
+                        generateWord().then(()=>{
+                            const totalGreens =  compareWords(word,inputWord,inputs);
+                            if(totalGreens===5){
+                                //Need to restart the game (except updating the score).
+                                score+=totalGreens;
+                                scoreArea.textContent=`Score : ${score}`;
+                                setTimeout(() => {
+                                    resetGame(forms,inputs);
+                                    startGame(forms);                                                        
+                                }, 1300);
+                            }
+                            else if(totalGreens < 5 && f === forms.length -1){
+                                // reached to the last and not able to guess (display the right answer and restart the game)
+                                resultDiv.textContent=`${word}`;
+                                resultDiv.style.visibility="visible";
+    
+                            }                            
+                        });
+                        if (f < forms.length - 1) {
+                            const nextRowInputs = forms[f + 1].querySelectorAll('input');
+                            nextRowInputs[0].focus(); // Move focus to the first input field of the next row
+                        }                        
+                    }
+                })
+            }
         }
-    }
 };
 
-processForm(forms);
+window.addEventListener("DOMContentLoaded", () => {
+    startGame(forms);
+});
 
 restartButton.addEventListener('click',()=>{
     resetGame(forms);
-    processForm(forms);
-})
+    startGame(forms);
+});
+  

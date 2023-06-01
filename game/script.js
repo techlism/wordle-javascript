@@ -47,24 +47,6 @@ const resetGame = (forms) => {
 
 }
 
-const compareWords = (word,inputWord,inputs)=>{
-    let totalGreens = 0;
-    for (let j = 0; j < inputWord.length; j++) {
-        if (word.includes(inputWord[j]) && inputWord[j] === word[j]) {
-            inputs[j].style.backgroundColor = '#00ac06';
-            totalGreens++;
-        } 
-        else if (word.includes(inputWord[j]) && inputWord[j] !== word[j]) {
-            inputs[j].style.backgroundColor = '#ffb405';
-        } 
-        else {
-            inputs[j].style.backgroundColor = '#484848';
-        }
-        inputs[j].style.color="#fff";
-    }
-    return totalGreens;    
-}
-
 const handleInput =(e,i,inputs,inputWord) =>{
     e.target.value = e.target.value.toUpperCase();
     const value = e.target.value;

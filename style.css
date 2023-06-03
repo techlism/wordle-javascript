@@ -5,11 +5,15 @@ body{
     background-color: hsl(66, 95%, 92%);
     font-family: 'Titan One',cursive,'Helvetica';
 }
-.para{
-    padding-left: 5vw;
-    padding-right: 5vw;
-    margin-top: 27vh;
+.heading{
     display:flex ;
+    justify-content: center;
+    align-items: center;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    margin-top: 13vh;
+}
+.para{
     text-align: center;
     font-size: 60px;
     font-weight: lighter;

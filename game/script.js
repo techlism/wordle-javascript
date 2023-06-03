@@ -47,10 +47,6 @@ const resetGame = (forms) => {
 }
 
 const compareWords = (word,inputWord,inputs)=>{
-    if(inputWord.length!=5){
-        alert("Please Write a 5 letter word);
-              return;
-    }
     let totalGreens = 0;
     word=word.toUpperCase(); // Redundant but it's fine
     inputWord=inputWord.toUpperCase();
@@ -114,7 +110,7 @@ const startGame = function (forms) {
                     inputWord = inputWord.slice(0, -1); // Remove the last character from the input word
                     }
 
-                    if(event.key==='Enter' && (inputWord.length > 4 || i >= 4 )){                        
+                    if(event.key==='Enter' && (inputWord.length > 4 && i >= 4 )){                        
                         generateWord().then(()=>{
                             const totalGreens =  compareWords(word,inputWord,inputs);
                             if(totalGreens===5 || word ===inputWord){

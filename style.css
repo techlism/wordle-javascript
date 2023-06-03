@@ -53,10 +53,9 @@ body{
     height: 82.5vh;
     border-radius: 20px;
     border: solid 1px;
-    font-size: 1.7vh;
+    font-size: 1.4vh;
     background-color: hsl(66, 95%, 92%);
     color:rgb(80, 80, 80);
-    overflow:hidden;
 }
 #dialog li{
     margin-top: 5vh;

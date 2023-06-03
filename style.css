@@ -49,13 +49,14 @@ body{
     width: 15px;
 }
 #dialog{
-    width: 73vw;
-    height: 83.5vh;
+    width: 75vw;
+    height: 82.5vh;
     border-radius: 20px;
     border: solid 1px;
     font-size: 1.7vh;
     background-color: hsl(66, 95%, 92%);
-    color:rgb(80, 80, 80)
+    color:rgb(80, 80, 80);
+    overflow:hidden;
 }
 #dialog li{
     margin-top: 5vh;

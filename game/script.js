@@ -48,18 +48,18 @@ const resetGame = (forms) => {
 
 const compareWords = (word,inputWord,inputs)=>{
     let totalGreens = 0;
-    word=word.toUpperCase();
+    word=word.toUpperCase(); // Redundant but it's fine
     inputWord=inputWord.toUpperCase();
     for (let j = 0; j < inputWord.length; j++) {
         if (word.includes(inputWord[j]) && inputWord[j] === word[j]) {
-            inputs[j].style.backgroundColor = '#00ac06';
+            inputs[j].style.backgroundColor = '#00ac06'; //green
             totalGreens++;
         } 
         else if (word.includes(inputWord[j]) && inputWord[j] !== word[j]) {
-            inputs[j].style.backgroundColor = '#ffb405';
+            inputs[j].style.backgroundColor = '#ffb405'; // yellow
         } 
         else {
-            inputs[j].style.backgroundColor = '#484848';
+            inputs[j].style.backgroundColor = '#484848'; //greyish
         }
         inputs[j].style.color="#fff";
     }
@@ -81,11 +81,10 @@ const startGame = function (forms) {
       }
     };
     
-    for (let f = 0; f < forms.length; f++) {
-      
+    for (let f = 0; f < forms.length; f++) {  
         let inputWord = '';
         const inputs = forms[f].querySelectorAll('input');
-        for (let i = 0; i < inputs.length; i++) {
+        for (let i = 0; i < inputs.length;++i) {
             const input = inputs[i];
 
             input.addEventListener('input', e => {
@@ -99,21 +98,22 @@ const startGame = function (forms) {
                     }
                 }
                 else if(value.length > 1){
+                    // To restrict the maximum input to 1
                     e.target.value=e.target.value.slice(0,1);
                 }
             
             });
 
             input.addEventListener('keydown',event=>{
-                    if (event.key === 'Backspace' && input.value.length === 0 && i > 0) {
+                    if (event.key === 'Backspace' && input.value.length === 0 && i > 0 && i <= 4) {
                     inputs[i - 1].focus(); // Move focus to the previous input field
                     inputWord = inputWord.slice(0, -1); // Remove the last character from the input word
                     }
 
-                    if(event.key==='Enter' && inputWord.length===5){                        
+                    if(event.key==='Enter' && (inputWord.length > 4 || i >= 4 )){                        
                         generateWord().then(()=>{
                             const totalGreens =  compareWords(word,inputWord,inputs);
-                            if(totalGreens===5){
+                            if(totalGreens===5 || word ===inputWord){
                                 //Need to restart the game (except updating the score).
                                 score+=totalGreens;
                                 scoreArea.textContent=`Score : ${score}`;

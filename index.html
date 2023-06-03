@@ -6,16 +6,36 @@
     <title>Wordle</title>
     <link rel="stylesheet" href="style.css">
     <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
 </head>
 <body>
     <div class="main">
         <p class="para">Welcome to a generic Wordle game.</p>
-    </div>    
-    <div class="buttonDiv">
-    <button onclick="location.href='game/start.html'" type="button">Let's Get Started</button>
+        <dialog id="dialog">
+            <div class="closebutton">
+                <button id="close"><img src="close.png" alt="close button"></button>
+            </div>
+            <div class="dialogDiv">
+                <p>How to play?</p>
+                <ul>
+                  <li>Guess the 5-letter word in 6 attempts.</li>
+                  <li>Type your guess in each row and press Enter.</li>
+                  <li>Correct guesses earn 5 points, and the game restarts with a new word.</li>
+                  <li>Click the reset icon to restart the game at any time.</li>
+                  <li style="margin-bottom: 5vh;">After all wrong guesses you'll see the right answer.</li>
+                  <p><div style="background-color: #00ac06;" class="color-popUp-div"></div> Correct letter and position.</p>
+                  <p><div style="background-color: #ffb405;" class="color-popUp-div"></div> Correct letter, wrong position.</p>
+                  <p><div style="background-color: #484848;" class="color-popUp-div ;"></div> Incorrect letter (Not present in the word).</p>
+                </ul>
+                <div class="startGame" style=" margin-top : 5vh">
+                    <button onclick="location.href='game/start.html'" type="button" class="startPlay">Let's get Started</button>
+                </div>
+            </div>
+        </dialog>
+        <div class="buttonDiv">
+            <button id="start">Start Playing</button>
+        </div>
     </div>
+    <script src="script.js"></script>
 </body>
 </html>

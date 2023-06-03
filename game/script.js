@@ -47,6 +47,10 @@ const resetGame = (forms) => {
 }
 
 const compareWords = (word,inputWord,inputs)=>{
+    if(inputWord.length!=5){
+        alert("Please Write a 5 letter word);
+              return;
+    }
     let totalGreens = 0;
     word=word.toUpperCase(); // Redundant but it's fine
     inputWord=inputWord.toUpperCase();
